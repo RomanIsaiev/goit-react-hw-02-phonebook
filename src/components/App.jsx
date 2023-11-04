@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { ContactForm } from './ContactForm/ContactForm';
+
 import { nanoid } from 'nanoid';
 
 export class App extends Component {
@@ -22,7 +24,7 @@ export class App extends Component {
 
     this.state.contacts.push({ name, number, id });
 
-    form.reset();
+    this.reset();
   };
 
   handleInputChange = event => {
@@ -31,6 +33,10 @@ export class App extends Component {
     this.setState({
       [name]: value,
     });
+  };
+
+  reset = () => {
+    this.setState({ name: '', number: '' });
   };
 
   render() {
@@ -46,6 +52,7 @@ export class App extends Component {
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
               id={this.nameInputId}
+              value={this.state.name}
               onChange={this.handleInputChange}
             />
           </label>
@@ -57,6 +64,7 @@ export class App extends Component {
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               id={this.numberInputId}
+              value={this.state.number}
               onChange={this.handleInputChange}
               required
             />
