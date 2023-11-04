@@ -20,7 +20,8 @@ export class App extends Component {
     const form = event.target;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    const id = form.elements.name.value;
+    // const id = form.elements.name.value;
+    const id = nanoid();
 
     this.state.contacts.push({ name, number, id });
 
@@ -42,6 +43,7 @@ export class App extends Component {
   render() {
     return (
       <div>
+        <h2>Phonebook</h2>
         <form onSubmit={this.handleSumbit}>
           <label htmlFor={this.loginInputId}>
             Name
@@ -69,8 +71,9 @@ export class App extends Component {
               required
             />
           </label>
-          <button type="submit">add contact</button>
+          <button type="submit">Add contact</button>
         </form>
+        <h2>Contacts</h2>
         <ul>
           {this.state.contacts.map(contact => (
             <li key={contact.id} className={this.state.name}>
