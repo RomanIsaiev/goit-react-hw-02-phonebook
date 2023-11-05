@@ -26,9 +26,9 @@ export class App extends Component {
   handleSumbit = event => {
     event.preventDefault();
 
-    const form = event.target;
-    const name = form.elements.name.value;
-    const number = form.elements.number.value;
+    const form = event.target.elements;
+    const name = form.name.value;
+    const number = form.number.value;
     const id = nanoid();
 
     if (
