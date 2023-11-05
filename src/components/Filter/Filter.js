@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-export const SearchBar = ({ filter, onUpdateName }) => {
+export const Filter = ({ filter, onUpdateName }) => {
   const filterInput = nanoid();
   return (
     <div>
