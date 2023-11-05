@@ -9,7 +9,12 @@ import { SearchBar } from './SearchBar/SearchBar';
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
     name: '',
     number: '',
     filter: '',
@@ -52,6 +57,13 @@ export class App extends Component {
 
   render() {
     const { contacts, filter } = this.state;
+
+    const visibleContacts = contacts.filter(item => {
+      const hasContact = item.name.toLowerCase().includes(filter.toLowerCase());
+
+      return hasContact;
+    });
+
     return (
       <div>
         <h2>Phonebook</h2>
@@ -86,7 +98,9 @@ export class App extends Component {
         </form>
         <h2>Contacts</h2>
         <SearchBar filter={filter} onUpdateName={this.updateContactsFilter} />
-        {contacts.length > 0 && <ContactsList contacts={contacts} />}
+        {visibleContacts.length > 0 && (
+          <ContactsList contacts={visibleContacts} />
+        )}
       </div>
     );
   }
