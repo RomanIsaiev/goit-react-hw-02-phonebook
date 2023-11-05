@@ -1,5 +1,12 @@
 import { nanoid } from 'nanoid';
 
+import {
+  InputsForm,
+  LabelForm,
+  FormInput,
+  SubmitButton,
+} from './ContactForm.styled';
+
 export const ContactForm = ({
   addContacts,
   onUpdateInput,
@@ -9,10 +16,10 @@ export const ContactForm = ({
   const nameInputId = nanoid();
   const numberInputId = nanoid();
   return (
-    <form onSubmit={addContacts}>
-      <label htmlFor={nameInputId}>
+    <InputsForm onSubmit={addContacts}>
+      <LabelForm htmlFor={nameInputId}>
         Name
-        <input
+        <FormInput
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -22,10 +29,10 @@ export const ContactForm = ({
           value={nameValue}
           onChange={onUpdateInput}
         />
-      </label>
-      <label htmlFor={numberInputId}>
+      </LabelForm>
+      <LabelForm htmlFor={numberInputId}>
         Number
-        <input
+        <FormInput
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -35,8 +42,8 @@ export const ContactForm = ({
           onChange={onUpdateInput}
           required
         />
-      </label>
-      <button type="submit">Add contact</button>
-    </form>
+      </LabelForm>
+      <SubmitButton type="submit">Add contact</SubmitButton>
+    </InputsForm>
   );
 };

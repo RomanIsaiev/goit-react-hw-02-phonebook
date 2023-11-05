@@ -7,6 +7,9 @@ import { ContactsList } from './ContactsList/ContactsList';
 
 import { Filter } from './Filter/Filter';
 
+import { Layout } from './App.styled';
+import { GlobalStyle } from 'GlobalStyle';
+
 export class App extends Component {
   state = {
     contacts: [
@@ -36,6 +39,7 @@ export class App extends Component {
       alert(`${name} is already in contacts`);
       return;
     }
+
     this.state.contacts.push({ name, number, id });
     this.reset();
   };
@@ -73,7 +77,7 @@ export class App extends Component {
     });
 
     return (
-      <div>
+      <Layout>
         <h1>Phonebook</h1>
         <ContactForm
           addContacts={this.handleSumbit}
@@ -89,7 +93,8 @@ export class App extends Component {
             onDeleteContact={this.deleteContact}
           />
         )}
-      </div>
+        <GlobalStyle />
+      </Layout>
     );
   }
 }

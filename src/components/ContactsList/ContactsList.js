@@ -1,8 +1,9 @@
 import { Contact } from 'components/Contact/Contact';
+import { ListWithContacts } from './ContactsList.styled';
 
 export const ContactsList = ({ contacts, onDeleteContact }) => {
   return (
-    <ul>
+    <ListWithContacts>
       {contacts.map(contact => (
         <Contact
           data={contact}
@@ -10,6 +11,6 @@ export const ContactsList = ({ contacts, onDeleteContact }) => {
           onDeleteContact={onDeleteContact}
         />
       ))}
-    </ul>
+    </ListWithContacts>
   );
 };
