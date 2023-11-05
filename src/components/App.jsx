@@ -3,11 +3,16 @@ import { ContactForm } from './ContactForm/ContactForm';
 
 import { nanoid } from 'nanoid';
 
+import { ContactsList } from './ContactsList/ContactsList';
+
+import { SearchBar } from './SearchBar/SearchBar';
+
 export class App extends Component {
   state = {
     contacts: [],
     name: '',
     number: '',
+    filter: '',
   };
 
   nameInputId = nanoid();
@@ -20,7 +25,6 @@ export class App extends Component {
     const form = event.target;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    // const id = form.elements.name.value;
     const id = nanoid();
 
     this.state.contacts.push({ name, number, id });
@@ -40,7 +44,14 @@ export class App extends Component {
     this.setState({ name: '', number: '' });
   };
 
+  updateContactsFilter = newContanct => {
+    this.setState({
+      filter: newContanct,
+    });
+  };
+
   render() {
+    const { contacts, filter } = this.state;
     return (
       <div>
         <h2>Phonebook</h2>
@@ -74,13 +85,8 @@ export class App extends Component {
           <button type="submit">Add contact</button>
         </form>
         <h2>Contacts</h2>
-        <ul>
-          {this.state.contacts.map(contact => (
-            <li key={contact.id} className={this.state.name}>
-              Name: {contact.name} Number: {contact.number}
-            </li>
-          ))}
-        </ul>
+        <SearchBar filter={filter} onUpdateName={this.updateContactsFilter} />
+        {contacts.length > 0 && <ContactsList contacts={contacts} />}
       </div>
     );
   }
