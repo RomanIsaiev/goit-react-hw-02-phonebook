@@ -42,3 +42,10 @@ export const SubmitButton = styled.button`
     transition: transform 250ms ease-in-out;
   }
 `;
+
+export const ErrorMessage = styled(FormikError)`
+  color: red;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 10px;
+`;

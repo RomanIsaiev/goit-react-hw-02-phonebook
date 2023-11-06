@@ -21,27 +21,6 @@ export class App extends Component {
     filter: '',
   };
 
-  // handleSumbit = event => {
-  //   event.preventDefault();
-
-  //   const form = event.target.elements;
-  //   const name = form.name.value;
-  //   const number = form.number.value;
-  //   const id = nanoid();
-
-  // if (
-  //   this.state.contacts.find(
-  //     item => item.name.toLowerCase().trim() === name.toLowerCase().trim()
-  //   )
-  // ) {
-  //   alert(`${name} is already in contacts`);
-  //   return;
-  // }
-
-  //   this.state.contacts.push({ name, number, id });
-  //   this.reset();
-  // };
-
   addContanct = newContact => {
     const contact = {
       ...newContact,
@@ -65,17 +44,6 @@ export class App extends Component {
       };
     });
   };
-
-  // handleInputChange = event => {
-  //   const { name, value } = event.currentTarget;
-  //   this.setState({
-  //     [name]: value,
-  //   });
-  // };
-
-  // reset = () => {
-  //   this.setState({ name: '', number: '' });
-  // };
 
   updateContactsFilter = newContanct => {
     this.setState({
