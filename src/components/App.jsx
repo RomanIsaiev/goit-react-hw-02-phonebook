@@ -18,42 +18,64 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    name: '',
-    number: '',
     filter: '',
   };
 
-  handleSumbit = event => {
-    event.preventDefault();
+  // handleSumbit = event => {
+  //   event.preventDefault();
 
-    const form = event.target.elements;
-    const name = form.name.value;
-    const number = form.number.value;
-    const id = nanoid();
+  //   const form = event.target.elements;
+  //   const name = form.name.value;
+  //   const number = form.number.value;
+  //   const id = nanoid();
 
-    if (
-      this.state.contacts.find(
-        item => item.name.toLowerCase().trim() === name.toLowerCase().trim()
-      )
-    ) {
-      alert(`${name} is already in contacts`);
-      return;
-    }
+  // if (
+  //   this.state.contacts.find(
+  //     item => item.name.toLowerCase().trim() === name.toLowerCase().trim()
+  //   )
+  // ) {
+  //   alert(`${name} is already in contacts`);
+  //   return;
+  // }
 
-    this.state.contacts.push({ name, number, id });
-    this.reset();
-  };
+  //   this.state.contacts.push({ name, number, id });
+  //   this.reset();
+  // };
 
-  handleInputChange = event => {
-    const { name, value } = event.currentTarget;
-    this.setState({
-      [name]: value,
+  addContanct = newContact => {
+    const contact = {
+      ...newContact,
+      id: nanoid(),
+    };
+
+    this.setState(prevState => {
+      if (
+        prevState.contacts.find(
+          item =>
+            item.name.toLowerCase().trim() ===
+            newContact.name.toLowerCase().trim()
+        )
+      ) {
+        alert(`${newContact.name} is already in contacts`);
+        return;
+      }
+
+      return {
+        contacts: [...prevState.contacts, contact],
+      };
     });
   };
 
-  reset = () => {
-    this.setState({ name: '', number: '' });
-  };
+  // handleInputChange = event => {
+  //   const { name, value } = event.currentTarget;
+  //   this.setState({
+  //     [name]: value,
+  //   });
+  // };
+
+  // reset = () => {
+  //   this.setState({ name: '', number: '' });
+  // };
 
   updateContactsFilter = newContanct => {
     this.setState({
@@ -79,12 +101,7 @@ export class App extends Component {
     return (
       <Layout>
         <h1>Phonebook</h1>
-        <ContactForm
-          addContacts={this.handleSumbit}
-          onUpdateInput={this.handleInputChange}
-          numberValue={this.state.number}
-          nameValue={this.state.name}
-        />
+        <ContactForm onAddContact={this.addContanct} />
         <h2>Contacts</h2>
         <Filter filter={filter} onUpdateName={this.updateContactsFilter} />
         {visibleContacts.length > 0 && (

@@ -1,18 +1,23 @@
+import {
+  Form as FormikForm,
+  Field as FormikField,
+  ErrorMessage as FormikError,
+} from 'formik';
 import styled from 'styled-components';
 
-export const InputsForm = styled.form`
+export const Form = styled(FormikForm)`
   display: flex;
   flex-direction: column;
   gap: 5px;
 `;
 
-export const LabelForm = styled.label`
+export const FormGroup = styled.label`
   display: flex;
   flex-direction: column;
   gap: 5px;
 `;
 
-export const FormInput = styled.input`
+export const Field = styled(FormikField)`
   max-width: 200px;
   margin-bottom: 10px;
   padding: 5px;

@@ -2,50 +2,34 @@ import { nanoid } from 'nanoid';
 
 import { Formik } from 'formik';
 
-import {
-  InputsForm,
-  LabelForm,
-  FormInput,
-  SubmitButton,
-} from './ContactForm.styled';
+// import { Form, Field, FormGroup, ErrorMessage } from './QuizForm.styled';
 
-export const ContactForm = ({
-  addContacts,
-  onUpdateInput,
-  numberValue,
-  nameValue,
-}) => {
+import { Form, FormGroup, Field, SubmitButton } from './ContactForm.styled';
+
+export const ContactForm = ({ onAddContact }) => {
   const nameInputId = nanoid();
   const numberInputId = nanoid();
   return (
-    <InputsForm onSubmit={addContacts}>
-      <LabelForm htmlFor={nameInputId}>
-        Name
-        <FormInput
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          id={nameInputId}
-          value={nameValue}
-          onChange={onUpdateInput}
-        />
-      </LabelForm>
-      <LabelForm htmlFor={numberInputId}>
-        Number
-        <FormInput
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          id={numberInputId}
-          value={numberValue}
-          onChange={onUpdateInput}
-          required
-        />
-      </LabelForm>
-      <SubmitButton type="submit">Add contact</SubmitButton>
-    </InputsForm>
+    <Formik
+      initialValues={{ name: '', number: '' }}
+      onSubmit={(values, actions) => {
+        onAddContact(values);
+        actions.resetForm();
+      }}
+    >
+      <Form>
+        <FormGroup>
+          Name
+          <Field type="text" name="name" id={nameInputId} />
+        </FormGroup>
+
+        <FormGroup>
+          Number
+          <Field type="tel" name="number" id={numberInputId} />
+        </FormGroup>
+
+        <SubmitButton type="submit">Add contact</SubmitButton>
+      </Form>
+    </Formik>
   );
 };
